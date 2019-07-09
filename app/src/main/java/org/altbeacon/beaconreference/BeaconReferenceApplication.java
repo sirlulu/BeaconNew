@@ -20,7 +20,7 @@ import org.altbeacon.beacon.startup.RegionBootstrap;
 import org.altbeacon.beacon.startup.BootstrapNotifier;
 
 /**
- * Created by dyoung on 12/13/13.
+ * Created by dyoung on 12/13/13
  */
 public class BeaconReferenceApplication extends Application implements BootstrapNotifier {
     private static final String TAG = "BeaconReferenceApp";

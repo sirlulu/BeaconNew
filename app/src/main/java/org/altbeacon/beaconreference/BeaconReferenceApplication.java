@@ -185,7 +185,6 @@ public class BeaconReferenceApplication extends Application implements Bootstrap
             this.monitoringActivity.updateLog(cumulativeLog);
         }
     }
-
     public String getLog() {
         return cumulativeLog;
     }

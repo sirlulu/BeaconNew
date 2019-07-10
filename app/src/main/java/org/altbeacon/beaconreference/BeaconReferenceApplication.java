@@ -62,8 +62,7 @@ public class BeaconReferenceApplication extends Application implements Bootstrap
                 null, null, null);
         regionBootstrap = new RegionBootstrap(this, region);
     }
-
-
+    
     @Override
     public void didEnterRegion(Region arg0) {
 

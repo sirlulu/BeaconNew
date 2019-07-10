@@ -20,6 +20,8 @@ import org.altbeacon.beacon.Region;
 public class RangingActivity extends Activity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this);
+    private Beacon greenBeacon;
+    private Beacon blueBeacon;
 
 
     @Override
@@ -51,21 +53,25 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         RangeNotifier rangeNotifier = new RangeNotifier() {
            @Override
            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-              if (beacons.size() > 0) {
-                  //Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
-                  //Beacon firstBeacon = beacons.iterator().next();
-                  //logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
-                  for (Beacon var : beacons)
-                  {
-                      if(var.getId3().equals(Identifier.fromInt(60004)))
-                      logToDisplay("The green beacon is about " +var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
-                      else if(var.getId3().equals(Identifier.fromInt(5012)))
-                      logToDisplay("The blue beacon is about " +var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
-                  }
-                  
-              }
-           }
+               if (beacons.size() > 0) {
+                   //Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
+                   //Beacon firstBeacon = beacons.iterator().next();
+                   //logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
+                   for (Beacon var : beacons) {
+                       if (var.getId3().equals(Identifier.fromInt(60004))) {
+                           greenBeacon = var;
+                           logToDisplay("The green beacon is about " + var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
+                           logToDisplay("Average RSSI is: " + greenBeacon.getRunningAverageRssi());
 
+                       } else if (var.getId3().equals(Identifier.fromInt(5012))) {
+                           blueBeacon = var;
+                           logToDisplay("The blue beacon is about " + var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
+                       }
+                   }
+
+               }
+
+           }
         };
         try {
             beaconManager.startRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));

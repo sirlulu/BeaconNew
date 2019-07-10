@@ -14,12 +14,14 @@ import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
 public class RangingActivity extends Activity implements BeaconConsumer {
     protected static final String TAG = "RangingActivity";
     private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +56,12 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                   //Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
                   //Beacon firstBeacon = beacons.iterator().next();
                   //logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
-                  int i = 0;
                   for (Beacon var : beacons)
                   {
-                      logToDisplay("The beacon " + ++i +" have an RSSI of " + var.getRssi() + " dB\n");
+                      //if(var.getId3().equals("60004"))
+                      logToDisplay("The blue beacon" + var.getId3() +" is about " +var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
+                     // else if(var.getId3().equals(60004))
+                     //     logToDisplay("The green beacon is about " +var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
                   }
               }
            }

@@ -62,8 +62,7 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                       else if(var.getId3().equals(Identifier.fromInt(5012)))
                       logToDisplay("The blue beacon is about " +var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
                   }
-
-
+                  
               }
            }
 

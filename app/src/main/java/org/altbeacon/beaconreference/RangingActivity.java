@@ -75,11 +75,20 @@ public class RangingActivity extends Activity implements BeaconConsumer {
                   }
 
                }
-               logToDisplay("For green beacon, average RSSI: "+ greenBeacon.getRunningAverageRssi() +
-                       "For blue beacon, average RSSI: "+ blueBeacon.getRunningAverageRssi() +"\n");
+               //logToDisplay("For green beacon, average RSSI: "+ greenBeacon.getRunningAverageRssi() +
+                 //    "\nFor blue beacon, average RSSI: "+ blueBeacon.getRunningAverageRssi() +"\n");
 
-               if(greenBeacon.getRunningAverageRssi()<100 && blueBeacon.getRunningAverageRssi()<100)
-                   logToDisplay("You are in ZONE A!\n");
+               if(greenBeacon.getRunningAverageRssi()>-70 && greenBeacon.getRunningAverageRssi()<-50
+                     && blueBeacon.getRunningAverageRssi()>-90 && blueBeacon.getRunningAverageRssi()<-70)
+                  logToDisplay("You are in your room! (What is your excuse for this mess?)\n");
+
+               if(greenBeacon.getRunningAverageRssi()>-90 && greenBeacon.getRunningAverageRssi()<-80
+                       && blueBeacon.getRunningAverageRssi()>-60 && blueBeacon.getRunningAverageRssi()<-40)
+                   logToDisplay("You are in the kitchen! (Drink something, alcohol free)\n");
+
+               if(greenBeacon.getRunningAverageRssi()>-75 && greenBeacon.getRunningAverageRssi()<-65
+                       && blueBeacon.getRunningAverageRssi()>-90 && blueBeacon.getRunningAverageRssi()<-75)
+                   logToDisplay("You are in Luca's room! (Congratulate him for passing APA) \n");
            }
         };
         try {

@@ -53,24 +53,33 @@ public class RangingActivity extends Activity implements BeaconConsumer {
         RangeNotifier rangeNotifier = new RangeNotifier() {
            @Override
            public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
+
                if (beacons.size() > 0) {
                    //Log.d(TAG, "didRangeBeaconsInRegion called with beacon count:  "+beacons.size());
                    //Beacon firstBeacon = beacons.iterator().next();
                    //logToDisplay("The first beacon " + firstBeacon.toString() + " is about " + firstBeacon.getDistance() + " meters away.");
-                   for (Beacon var : beacons) {
-                       if (var.getId3().equals(Identifier.fromInt(60004))) {
-                           greenBeacon = var;
-                           logToDisplay("The green beacon is about " + var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
-                           logToDisplay("Average RSSI is: " + greenBeacon.getRunningAverageRssi());
+                  for (Beacon var : beacons) {
+                      for (int i = 0; i < 10; i++) {
+                          if (var.getId3().equals(Identifier.fromInt(60004))) {
+                              greenBeacon = var;
+                              //logToDisplay("Green beacon recognised\n");
+                              //logToDisplay("The green beacon is about " + var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
+                              //logToDisplay("Average RSSI is: " + greenBeacon.getRunningAverageRssi());
 
-                       } else if (var.getId3().equals(Identifier.fromInt(5012))) {
-                           blueBeacon = var;
-                           logToDisplay("The blue beacon is about " + var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
-                       }
-                   }
+                          } else if (var.getId3().equals(Identifier.fromInt(5012))) {
+                              blueBeacon = var;
+                              //logToDisplay("Blue beacon recognised\n");
+                              //logToDisplay("The blue beacon is about " + var.getDistance() + " meters away and has an RSSI of " + var.getRssi() + " dB\n");
+                          }
+                      }
+                  }
 
                }
+               logToDisplay("For green beacon, average RSSI: "+ greenBeacon.getRunningAverageRssi() +
+                       "For blue beacon, average RSSI: "+ blueBeacon.getRunningAverageRssi() +"\n");
 
+               if(greenBeacon.getRunningAverageRssi()<100 && blueBeacon.getRunningAverageRssi()<100)
+                   logToDisplay("You are in ZONE A!\n");
            }
         };
         try {
